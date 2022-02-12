@@ -1,0 +1,7 @@
+{
+  "user": "root",
+  "host": "localhost",
+  "pasword": "",
+  "database": "expenses_app",
+  "dialect": "mysql"
+}

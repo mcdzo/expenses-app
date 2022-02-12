@@ -1,0 +1,23 @@
+.display {
+  margin: 20px;
+  width: 400px;
+  height: 150px;
+  background-color: #e2e8f0;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.display-title {
+  width: 100%;
+  height: 20%;
+  font-size: 18px;
+}
+
+.display-balance {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 46px;
+}
