@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const userRoutes = require("./routes/user.routes");
+const transactionRoutes = require("./routes/transaction.routes");
 const db = require("./db/database");
 
 const app = express();
@@ -34,5 +35,6 @@ try {
 }
 
 app.use("/api", userRoutes);
+app.use("/api", transactionRoutes);
 
 module.exports = app;

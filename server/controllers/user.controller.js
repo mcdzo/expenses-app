@@ -56,7 +56,7 @@ const controller = {
           username: params.username,
           password: encryptedPassword,
         }).then(() => {
-          return res.status(500).send({
+          return res.status(200).send({
             message: ">>> User created successfully",
           });
         });
@@ -83,37 +83,51 @@ const controller = {
         where: {
           username: params.username,
         },
-      }).then((user) => {
-        if (user === null) {
-          return res.status(500).send({
-            error: ">>> That username doesn´t exists ",
+      }).then((result) => {
+        if (result === null) {
+          console.log("That username doesnt exists");
+          return res.status(200).send({
+            status: "error",
+            value: false,
+            result: "invalid username",
           });
         }
 
-        console.log(user);
+        console.log(result);
 
-        if (bcrypt.compareSync(params.password, user.password)) {
-          console.log("la contraseña es correcta");
-
+        if (bcrypt.compareSync(params.password, result.password)) {
           const token = jwt.sign(
-            { id: user.id, email: user.email },
+            { id: result.id, email: result.email },
             process.env.TOKEN_KEY,
             {
               expiresIn: "2h",
             }
           );
-          user.token = token;
+          result.token = token;
+          const user = {
+            id: result.id,
+            name: result.name,
+            surname: result.surname,
+            username: result.username,
+          };
           res.status(200).send({
             status: "success",
             value: true,
-            user: user, ///hace falta que devuelva el user?
-            jwt: user.token,
+            user: user,
+            jwt: result.token,
           });
-          console.log(user.token);
         } else {
-          console.log("la contraseña no es correcta");
-          res.status(400).send(">>> (!) Contraseña incorrecta");
+          console.log("Incorrect password");
+          return res.status(200).send({
+            status: "invalid password",
+            value: false,
+          });
         }
+      });
+    } else {
+      return res.status(400).send({
+        status: "some data is missing",
+        value: false,
       });
     }
   },

@@ -1,61 +1,26 @@
-import { useState } from "react";
-import Transaction from "../Transaction/Transaction";
 import "./List.css";
+
+import { useState, useEffect, useContext } from "react";
+
+import Transaction from "../Transaction/Transaction";
 import NewTransactionForm from "../NewTransactionForm/NewTransactionForm";
+import UserTransactions from "../../services/Transactions/UserTransactions";
+import transactionContext from "../../context/transactionContext";
+import NewTransaction from "../../services/Transactions/NewTransaction";
 
 const List = () => {
   const [showForm, setShowForm] = useState(false);
-  const [transactions, setTransactions] = useState([
-    {
-      id: "1",
-      concept: "Pago de impuestos",
-      amount: "1000",
-      date: "02/02/2022",
-      type: "Egreso",
-    },
-    {
-      id: "2",
-      concept: "Pago de impuestos",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-    {
-      id: "3",
-      concept: "Comida",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-    {
-      id: "4",
-      concept: "Comida",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-    {
-      id: "5",
-      concept: "Comida",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-    {
-      id: "6",
-      concept: "Comida",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-    {
-      id: "7",
-      concept: "Comida",
-      amount: "1000",
-      date: "02/03/2022",
-      type: "Egreso",
-    },
-  ]);
+  const { transactions, dispatch } = useContext(transactionContext);
+
+  useEffect(() => {
+    UserTransactions().then((transactions) => {
+      console.log(transactions);
+      dispatch({
+        type: "GET_TRANSACTIONS",
+        transactions: transactions,
+      });
+    });
+  }, []);
 
   const onShowForm = () => {
     setShowForm(!showForm);
@@ -66,16 +31,20 @@ const List = () => {
   };
 
   const addTransaction = ({ concept, amount, date, type }) => {
-    const id = Math.random() * (10000 - 100) + 100;
     const transaction = {
       concept,
       amount,
       date,
       type,
     };
-    const newTransaction = { ...transaction, id };
-    console.log(newTransaction);
-    setTransactions([...transactions, newTransaction]);
+
+    NewTransaction(transaction).then((tr) => {
+      console.log(tr);
+      dispatch({
+        type: "ADD_TRANSACTION",
+        transaction: tr,
+      });
+    });
   };
   const onEdit = ({ concept, amount, date, id }) => {
     const editedTransaction = {
@@ -92,13 +61,22 @@ const List = () => {
   const onDelete = (id) => {
     console.log(id);
 
-    setTransactions(transactions.filter((element) => element.id !== id));
+    // setTransactions(transactions.filter((element) => element.id !== id));
   };
 
   return (
     <section className="transactions-section">
       <div className="list-title">
         <h4>Últimas Tansacciones: </h4>
+        <div className="category-list">
+          <label>Ordenar por: </label>
+          <select>
+            <option value="Fecha">Fecha</option>
+            <option value="Comida">Comida</option>
+            <option value="income">Ingreso</option>
+            <option value="outcome">Egreso</option>
+          </select>
+        </div>
       </div>
       <div className="transactions-container">
         {transactions.map((transaction) => (

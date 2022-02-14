@@ -83,7 +83,7 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
               type="radio"
               name="type"
               className="type-input"
-              value="Ingreso"
+              value="income"
               onChange={handleType}
             ></input>
             Egreso
@@ -91,7 +91,7 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
               type="radio"
               name="type"
               className="type-input"
-              value="Egreso"
+              value="outcome"
               onChange={handleType}
             ></input>
           </div>

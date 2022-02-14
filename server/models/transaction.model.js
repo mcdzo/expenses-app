@@ -1,28 +1,36 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db/database");
-//const Transaction = require("./transaction.model");
-const User = db.define(
-  "user",
+const User = require("./user.model");
+
+const Transaction = db.define(
+  "transaction",
   {
     id: {
       type: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    concept: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    surname: {
-      type: DataTypes.STRING,
+    amount: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    username: {
-      type: DataTypes.STRING,
+    date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    password: {
+    type: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [["income", "outcome"]],
+      },
+    },
+    user_id: {
+      type: DataTypes.UUIDV4,
       allowNull: false,
     },
   },
@@ -31,6 +39,4 @@ const User = db.define(
   }
 );
 
-//User.hasMany(Transaction);
-
-module.exports = User;
+module.exports = Transaction;

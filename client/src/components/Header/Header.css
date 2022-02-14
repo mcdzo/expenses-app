@@ -17,3 +17,19 @@
   justify-content: flex-end;
   padding: 0px 20px;
 }
+
+.user-menu button {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  color: #000000;
+  font-size: 20px;
+  background: #ffffff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.user-menu button:hover {
+  color: #d60808;
+}

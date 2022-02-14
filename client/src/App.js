@@ -1,16 +1,19 @@
+import { Route } from "wouter";
+
 import "./App.css";
-import Display from "./components/Display/Display";
-import Header from "./components/Header/Header";
-import List from "./components/ListOfTransactions/List";
+
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import { TransactionContextProvider } from "./context/transactionContext";
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <section className="app-content">
-        <Display></Display>
-        <List></List>
-      </section>
+      <TransactionContextProvider>
+        <Route path="/home" component={Home}></Route>
+      </TransactionContextProvider>
+
+      <Route path="/" component={Login}></Route>
     </div>
   );
 }
