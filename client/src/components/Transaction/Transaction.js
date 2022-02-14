@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 
 const Transaction = ({ transaction, onEdit, onDelete }) => {
+  const [showDelete, setShowDelete] = useState(false);
   const [edit, setEdit] = useState(false);
   const [concept, setConcept] = useState("");
   const [amount, setAmount] = useState("");
@@ -34,6 +35,16 @@ const Transaction = ({ transaction, onEdit, onDelete }) => {
       onEdit({ concept, amount, date, id });
       setEdit(!edit);
     }
+  };
+  const handleDeleteModal = () => {
+    setShowDelete(!showDelete);
+  };
+
+  const handleDelete = (id) => {
+    onDelete(id);
+
+    console.log("delete");
+    setShowDelete(!showDelete);
   };
 
   return (
@@ -88,17 +99,41 @@ const Transaction = ({ transaction, onEdit, onDelete }) => {
           </>
         ) : (
           <>
-            <FaTrashAlt
-              className="delete-icon"
-              onClick={() => onDelete(transaction.id)}
-            ></FaTrashAlt>
             <FaPencilAlt
               className="edit-icon"
               onClick={handleEdit}
             ></FaPencilAlt>
+
+            <FaTrashAlt
+              className="delete-icon"
+              onClick={handleDeleteModal}
+            ></FaTrashAlt>
           </>
         )}
       </div>
+      {showDelete && (
+        <div className="delete-modal">
+          <div className="delete-form">
+            <div className="delete-form-header">
+              <button onClick={handleDeleteModal}>Cerrar</button>
+            </div>
+            <div className="delete-form-question">
+              <strong>Esta seguro que quiere eliminar esta transaccion?</strong>
+              <div className="delete-form-options">
+                <button className="button-no" onClick={handleDeleteModal}>
+                  No
+                </button>
+                <button
+                  className="button-yes"
+                  onClick={() => handleDelete(transaction.id)}
+                >
+                  Si
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

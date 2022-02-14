@@ -41,31 +41,30 @@ const controller = {
       return res.status(200).send({
         error: ">>> Some data is missing",
       });
-    } else {
-      const id = uuidv4();
-
-      Transaction.create({
-        id: id,
-        concept: params.concept,
-        amount: params.amount,
-        date: params.date,
-        type: params.type,
-        user_id: params.user_id,
-      })
-        .then((transaction) => {
-          console.log("<<<<", transaction);
-          return res.status(200).send({
-            message: ">>> Transaction created successfully",
-            transaction,
-          });
-        })
-        .catch((err) => {
-          return res.status(200).send({
-            message: "Something's gone wrong, check the entries",
-            err,
-          });
-        });
     }
+    const id = uuidv4();
+
+    Transaction.create({
+      id: id,
+      concept: params.concept,
+      amount: params.amount,
+      date: params.date,
+      type: params.type,
+      user_id: params.user_id,
+    })
+      .then((transaction) => {
+        console.log("<<<<", transaction);
+        return res.status(200).send({
+          message: ">>> Transaction created successfully",
+          transaction,
+        });
+      })
+      .catch((err) => {
+        return res.status(200).send({
+          message: "Something's gone wrong, check the entries",
+          err,
+        });
+      });
   },
   deleteTransaction: (req, res) => {
     const params = req.body;

@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db/database");
-//const Transaction = require("./transaction.model");
+
 const User = db.define(
   "user",
   {
@@ -30,7 +30,5 @@ const User = db.define(
     timestamps: false,
   }
 );
-
-//User.hasMany(Transaction);
 
 module.exports = User;

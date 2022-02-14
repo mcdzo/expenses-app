@@ -39,10 +39,20 @@
   justify-content: space-evenly;
 }
 
+.delete-icon {
+  margin-left: 15px;
+}
+
 .delete-icon:hover {
   cursor: pointer;
   color: rgb(255, 10, 10);
 }
+
+.edit-icon,
+.cancel-icon {
+  margin: 7px;
+}
+
 .edit-icon:hover {
   cursor: pointer;
   color: rgb(10, 96, 255);
@@ -67,4 +77,84 @@
 
 .transaction-amount-input {
   width: 60px;
+}
+
+.delete-modal {
+  background-color: hsla(0, 0%, 59%, 0.507);
+  backdrop-filter: blur(4px);
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-form {
+  background-color: #ffffff;
+  width: 400px;
+  height: 300px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 15px;
+}
+.delete-form-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.delete-form-header button {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(200, 32, 32);
+  font-size: 14px;
+}
+
+.delete-form-question {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-form-options {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-form-options button {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  padding: 6px 12px 6px 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.delete-form-options .button-yes:hover {
+  background-color: rgb(10, 180, 66);
+}
+.delete-form-options .button-no:hover {
+  background-color: rgb(180, 30, 10);
 }
