@@ -9,6 +9,9 @@ const reducer = (transactions, action) => {
     case "ADD_TRANSACTION":
       const newTransaction = action.transaction;
       return [...transactions, newTransaction];
+    case "DELETE_TRANSACTION":
+      const newTransactions = transactions.filter((tr) => tr.id !== action.id);
+      return newTransactions;
 
     default:
       return transactions;

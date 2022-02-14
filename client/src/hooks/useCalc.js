@@ -1,24 +1,7 @@
-import "./Display.css";
-import useCalc from "../../hooks/useCalc";
-
-const Display = () => {
-  const { total } = useCalc();
-  return (
-    <section className="display">
-      <div className="display-title">Balance: </div>
-      <div className="display-balance">$ {total}</div>
-    </section>
-  );
-};
-
-export default Display;
-
-/*
-  
-import transactionContext from "../../context/transactionContext";
+import transactionContext from "../context/transactionContext";
 import { useContext } from "react";
-  
-  
+
+const Calc = () => {
   const { transactions } = useContext(transactionContext);
   console.log(transactions);
   const type_income = transactions.filter((tr) => tr.type === "income");
@@ -34,4 +17,8 @@ import { useContext } from "react";
     outcome = outcome + parseInt(transaction.amount);
   });
 
-  const total = income - outcome;*/
+  const total = income - outcome;
+  return { total };
+};
+
+export default Calc;

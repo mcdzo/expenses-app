@@ -25,6 +25,8 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
     if (concept === "" || amount === "" || date === "" || type === "") {
       alert("Faltan campos por completar!");
     } else {
+      parseInt(amount);
+
       addTransaction({ concept, amount, date, type });
       onCloseForm();
     }

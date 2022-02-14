@@ -25,7 +25,7 @@
   margin: 0px 5px;
 
   border: none;
-  color: rgb(144, 144, 144);
+  color: rgb(0, 0, 0);
 }
 .transaction-description input:focus {
   outline: none;

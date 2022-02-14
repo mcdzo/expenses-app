@@ -7,6 +7,8 @@ import NewTransactionForm from "../NewTransactionForm/NewTransactionForm";
 import UserTransactions from "../../services/Transactions/UserTransactions";
 import transactionContext from "../../context/transactionContext";
 import NewTransaction from "../../services/Transactions/NewTransaction";
+import DeleteTransaction from "../../services/Transactions/DeleteTransaction";
+import EditTransaction from "../../services/Transactions/EditTransaction";
 
 const List = () => {
   const [showForm, setShowForm] = useState(false);
@@ -48,12 +50,25 @@ const List = () => {
   };
   const onEdit = ({ concept, amount, date, id }) => {
     const editedTransaction = {
-      id,
-      concept,
-      amount,
-      date,
+      id: id,
+      concept: concept,
+      amount: amount,
+      date: date,
     };
     console.log(editedTransaction);
+
+    EditTransaction(editedTransaction).then((res) => {
+      if (res) {
+        //Ver si hay otra manera
+        UserTransactions().then((transactions) => {
+          console.log(transactions);
+          dispatch({
+            type: "GET_TRANSACTIONS",
+            transactions: transactions,
+          });
+        });
+      }
+    });
 
     //accion de editar en la base de datos
   };
@@ -61,6 +76,14 @@ const List = () => {
   const onDelete = (id) => {
     console.log(id);
 
+    DeleteTransaction(id).then((res) => {
+      if (res) {
+        dispatch({
+          type: "DELETE_TRANSACTION",
+          id: id,
+        });
+      }
+    });
     // setTransactions(transactions.filter((element) => element.id !== id));
   };
 
