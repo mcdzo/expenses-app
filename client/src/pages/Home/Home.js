@@ -1,9 +1,10 @@
 import "./Home.css";
 import { useEffect, useContext, useState } from "react";
+import { Link } from "wouter";
 
 import Header from "../../components/Header/Header";
 import Display from "../../components/Display/Display";
-import List from "../../components/ListOfTransactions/List";
+import List from "../../components/LastTransactions/List";
 import NewTransactionForm from "../../components/NewTransactionForm/NewTransactionForm";
 
 import transactionContext from "../../context/transactionContext";
@@ -36,7 +37,11 @@ const Home = () => {
       <section className="app-content">
         <Display></Display>
         <List></List>
-        <button onClick={onShowForm}>Nueva Transaccion</button>
+        <div className="home-options-section">
+          <button onClick={onShowForm}>Nueva Transaccion</button>
+          <Link to="/all-transactions">Ver todas las transacciones</Link>
+        </div>
+
         {showForm && (
           <NewTransactionForm onCloseForm={onCloseForm}></NewTransactionForm>
         )}

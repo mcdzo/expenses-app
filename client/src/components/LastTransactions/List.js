@@ -3,21 +3,27 @@ import "./List.css";
 import { useState, useEffect, useContext } from "react";
 import Transaction from "../Transaction/Transaction";
 import transactionContext from "../../context/transactionContext";
+import LastTransactions from "../../services/Transactions/LastTransactions";
 
 const List = () => {
   const { transactions } = useContext(transactionContext);
-  const [TransactionsByCategory, setCategory] = useState(transactions);
+  const [lastTransactions, setLastTransactions] = useState([]);
+  const [TransactionsByCategory, setCategory] = useState([]);
 
   useEffect(() => {
-    setCategory(transactions);
+    LastTransactions().then((transactions) => {
+      console.log(transactions);
+      setLastTransactions(transactions);
+      setCategory(transactions);
+    });
   }, [transactions]);
 
   const handleCategory = (evt) => {
     const keyword = evt.target.value;
     if (keyword === "all") {
-      setCategory(transactions);
+      setCategory(lastTransactions);
     } else {
-      setCategory(transactions.filter((el) => el.category === keyword));
+      setCategory(lastTransactions.filter((el) => el.category === keyword));
     }
   };
 
@@ -31,7 +37,6 @@ const List = () => {
             <option value="all">Todas</option>
             <option value="food">Comida</option>
             <option value="streaming">Streaming</option>
-            <option value="taxes">Impuestos</option>
           </select>
         </div>
       </div>

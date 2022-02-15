@@ -113,7 +113,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
               onChange={handleType}
               onClick={handleIncomeCategory}
             ></input>
-            Egreso
+            Gasto
             <input
               id="outcome"
               type="radio"

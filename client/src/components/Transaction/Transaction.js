@@ -5,7 +5,7 @@ import {
   FaCheck,
   FaWindowClose,
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useTransactions from "../../hooks/useTransactions";
 
 const Transaction = ({ transaction }) => {
@@ -16,16 +16,18 @@ const Transaction = ({ transaction }) => {
   const [concept, setConcept] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
-  const [color, setColor] = useState();
 
-  useEffect(() => {
-    if (transaction.type === "income") {
-      setColor("green");
-    }
-    if (transaction.type === "outcome") {
-      setColor("red");
-    }
-  }, []);
+  const typeOp = {
+    income: "Ingreso",
+    outcome: "Gasto",
+  };
+  const type = typeOp[transaction.type];
+
+  const colorOp = {
+    income: "green",
+    outcome: "red",
+  };
+  const color = colorOp[transaction.type];
 
   const handleConcept = (evt) => {
     setConcept(evt.target.value);
@@ -97,9 +99,7 @@ const Transaction = ({ transaction }) => {
             <small>{transaction.date}</small>
           )}
         </div>
-        <div className="transaction-type">
-          {!edit && <small>{transaction.type}</small>}
-        </div>
+        <div className="transaction-type">{!edit && <small>{type}</small>}</div>
       </div>
       <div className="transaction-actions">
         {edit ? (
@@ -127,22 +127,17 @@ const Transaction = ({ transaction }) => {
       {showDelete && (
         <div className="delete-modal">
           <div className="delete-form">
-            <div className="delete-form-header">
-              <button onClick={handleDeleteModal}>Cerrar</button>
-            </div>
-            <div className="delete-form-question">
-              <strong>Esta seguro que quiere eliminar esta transaccion?</strong>
-              <div className="delete-form-options">
-                <button className="button-no" onClick={handleDeleteModal}>
-                  No
-                </button>
-                <button
-                  className="button-yes"
-                  onClick={() => handleDelete(transaction.id)}
-                >
-                  Si
-                </button>
-              </div>
+            <strong>Esta seguro que quiere eliminar esta transaccion?</strong>
+            <div className="delete-form-options">
+              <button className="button-no" onClick={handleDeleteModal}>
+                Cerrar
+              </button>
+              <button
+                className="button-yes"
+                onClick={() => handleDelete(transaction.id)}
+              >
+                Si
+              </button>
             </div>
           </div>
         </div>
@@ -152,3 +147,6 @@ const Transaction = ({ transaction }) => {
 };
 
 export default Transaction;
+/*  <div className="delete-form-header">
+              <button onClick={handleDeleteModal}>Cerrar</button>
+            </div>*/

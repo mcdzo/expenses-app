@@ -4,8 +4,6 @@ const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
-const { Op } = require("sequelize");
-
 const User = require("../models/user.model");
 
 const controller = {
@@ -134,11 +132,3 @@ const controller = {
 };
 
 module.exports = controller;
-
-/*
-    
-      where: {
-          [Op.or]: [{ email: params.email }, { username: params.username }],
-        }, 
-        
-        */

@@ -4,7 +4,7 @@
   -moz-border-radius: 8;
   border-radius: 8px;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 22px;
   background: #000000;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
@@ -15,4 +15,20 @@
 .app-content button:hover {
   background: #353535;
   text-decoration: none;
+}
+
+.home-options-section a {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  text-decoration: none;
+  padding: 10px 20px 10px 20px;
+  color: #000000;
+  border: 1px solid #000000;
+  font-size: 20px;
+  margin: 20px;
+}
+.home-options-section a:hover {
+  color: #128f12;
+  border: 1px solid #128f12;
 }
