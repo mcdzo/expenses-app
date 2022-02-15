@@ -5,14 +5,27 @@ import {
   FaCheck,
   FaWindowClose,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useTransactions from "../../hooks/useTransactions";
 
-const Transaction = ({ transaction, onEdit, onDelete }) => {
+const Transaction = ({ transaction }) => {
+  const { onEdit, onDelete } = useTransactions();
+
   const [showDelete, setShowDelete] = useState(false);
   const [edit, setEdit] = useState(false);
   const [concept, setConcept] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const [color, setColor] = useState();
+
+  useEffect(() => {
+    if (transaction.type === "income") {
+      setColor("green");
+    }
+    if (transaction.type === "outcome") {
+      setColor("red");
+    }
+  }, []);
 
   const handleConcept = (evt) => {
     setConcept(evt.target.value);
@@ -48,7 +61,7 @@ const Transaction = ({ transaction, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="transaction">
+    <div className={`transaction ${color}`}>
       <div className="transaction-description">
         <div className="transaction-concept">
           {edit ? (

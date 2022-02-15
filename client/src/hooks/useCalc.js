@@ -10,11 +10,11 @@ const Calc = () => {
   let income = 0;
   let outcome = 0;
   type_income.forEach((transaction) => {
-    income = income + parseInt(transaction.amount);
+    income = income + parseFloat(transaction.amount);
   });
 
   type_outcome.forEach((transaction) => {
-    outcome = outcome + parseInt(transaction.amount);
+    outcome = outcome + parseFloat(transaction.amount);
   });
 
   const total = income - outcome;

@@ -4,6 +4,7 @@ const router = express.Router();
 const transactionController = require("../controllers/transaction.controller");
 
 router.post("/user-transactions", auth, transactionController.userTransactions);
+router.post("/last-transactions", auth, transactionController.lastTransactions);
 router.post("/new-transaction", auth, transactionController.newTransaction);
 router.post(
   "/delete-transaction",

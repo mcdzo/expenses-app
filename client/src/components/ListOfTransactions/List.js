@@ -1,90 +1,24 @@
 import "./List.css";
 
 import { useState, useEffect, useContext } from "react";
-
 import Transaction from "../Transaction/Transaction";
-import NewTransactionForm from "../NewTransactionForm/NewTransactionForm";
-import UserTransactions from "../../services/Transactions/UserTransactions";
 import transactionContext from "../../context/transactionContext";
-import NewTransaction from "../../services/Transactions/NewTransaction";
-import DeleteTransaction from "../../services/Transactions/DeleteTransaction";
-import EditTransaction from "../../services/Transactions/EditTransaction";
 
 const List = () => {
-  const [showForm, setShowForm] = useState(false);
-  const { transactions, dispatch } = useContext(transactionContext);
+  const { transactions } = useContext(transactionContext);
+  const [TransactionsByCategory, setCategory] = useState(transactions);
 
   useEffect(() => {
-    UserTransactions().then((transactions) => {
-      console.log(transactions);
-      dispatch({
-        type: "GET_TRANSACTIONS",
-        transactions: transactions,
-      });
-    });
-  }, []);
+    setCategory(transactions);
+  }, [transactions]);
 
-  const onShowForm = () => {
-    setShowForm(!showForm);
-  };
-
-  const onCloseForm = () => {
-    setShowForm(!showForm);
-  };
-
-  const addTransaction = ({ concept, amount, date, type }) => {
-    const transaction = {
-      concept,
-      amount,
-      date,
-      type,
-    };
-
-    NewTransaction(transaction).then((tr) => {
-      console.log(tr);
-      dispatch({
-        type: "ADD_TRANSACTION",
-        transaction: tr,
-      });
-    });
-  };
-  const onEdit = ({ concept, amount, date, id }) => {
-    const editedTransaction = {
-      id: id,
-      concept: concept,
-      amount: amount,
-      date: date,
-    };
-    console.log(editedTransaction);
-
-    EditTransaction(editedTransaction).then((res) => {
-      if (res) {
-        //Ver si hay otra manera
-        UserTransactions().then((transactions) => {
-          console.log(transactions);
-          dispatch({
-            type: "GET_TRANSACTIONS",
-            transactions: transactions,
-          });
-        });
-      }
-    });
-
-    //accion de editar en la base de datos
-  };
-
-  const onDelete = (id) => {
-    console.log(id);
-
-    DeleteTransaction(id).then((res) => {
-      if (res) {
-        dispatch({
-          type: "DELETE_TRANSACTION",
-          id: id,
-        });
-      }
-    });
-    // setTransactions(transactions.filter((element) => element.id !== id));
+  const handleCategory = (evt) => {
+    const keyword = evt.target.value;
+    if (keyword === "all") {
+      setCategory(transactions);
+    } else {
+      setCategory(transactions.filter((el) => el.category === keyword));
+    }
   };
 
   return (
@@ -92,32 +26,23 @@ const List = () => {
       <div className="list-title">
         <h4>Últimas Tansacciones: </h4>
         <div className="category-list">
-          <label>Ordenar por: </label>
-          <select>
-            <option value="Fecha">Fecha</option>
-            <option value="Comida">Comida</option>
-            <option value="income">Ingreso</option>
-            <option value="outcome">Egreso</option>
+          <label>Categorías: </label>
+          <select onClick={handleCategory}>
+            <option value="all">Todas</option>
+            <option value="food">Comida</option>
+            <option value="streaming">Streaming</option>
+            <option value="taxes">Impuestos</option>
           </select>
         </div>
       </div>
       <div className="transactions-container">
-        {transactions.map((transaction) => (
+        {TransactionsByCategory.map((transaction) => (
           <Transaction
-            onEdit={onEdit}
-            onDelete={onDelete}
             transaction={transaction}
             key={transaction.id}
           ></Transaction>
         ))}
       </div>
-      <button onClick={onShowForm}>Nueva Transaccion</button>
-      {showForm && (
-        <NewTransactionForm
-          onCloseForm={onCloseForm}
-          addTransaction={addTransaction}
-        ></NewTransactionForm>
-      )}
     </section>
   );
 };

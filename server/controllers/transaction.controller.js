@@ -8,7 +8,32 @@ const controller = {
     const params = req.body;
     console.log(params);
 
-    Transaction.findAll({ where: { user_id: params.user_id } })
+    Transaction.findAll({
+      where: { user_id: params.user_id },
+      order: [["date", "desc"]],
+    })
+      .then((result) => {
+        return res.status(200).send({
+          message: "success",
+          result,
+        });
+      })
+      .catch((err) => {
+        return res.status(200).send({
+          message: "Something's gone wrong, check the entries",
+          err,
+        });
+      });
+  },
+  lastTransactions: (req, res) => {
+    const params = req.body;
+    console.log(params);
+
+    Transaction.findAll({
+      where: { user_id: params.user_id },
+      limit: 10,
+      order: [["date", "desc"]],
+    })
       .then((result) => {
         return res.status(200).send({
           message: "success",
@@ -30,13 +55,15 @@ const controller = {
     const validate_date = validator.isEmpty(params.date);
     const validate_type = validator.isEmpty(params.type);
     const validate_user_id = validator.isEmpty(params.user_id);
+    const validate_category = validator.isEmpty(params.category);
 
     if (
       validate_concept ||
       validate_amount ||
       validate_date ||
       validate_type ||
-      validate_user_id
+      validate_user_id ||
+      validate_category
     ) {
       return res.status(200).send({
         error: ">>> Some data is missing",
@@ -51,6 +78,7 @@ const controller = {
       date: params.date,
       type: params.type,
       user_id: params.user_id,
+      category: params.category,
     })
       .then((transaction) => {
         console.log("<<<<", transaction);

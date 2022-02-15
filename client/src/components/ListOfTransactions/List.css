@@ -1,6 +1,6 @@
 .transactions-section {
   width: 100%;
-  min-height: 25em;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,25 +19,6 @@
   flex-direction: column;
   align-items: center;
   padding-right: 22px;
-}
-
-.transactions-section button {
-  margin: 20px;
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
-  border-radius: 8px;
-  color: #ffffff;
-  font-size: 20px;
-  background: #000000;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
-
-.transactions-section button:hover {
-  background: #353535;
-  text-decoration: none;
 }
 
 .list-title {

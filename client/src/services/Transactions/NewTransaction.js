@@ -12,6 +12,7 @@ const NewTransaction = (transaction) => {
       date: transaction.date,
       type: transaction.type,
       user_id: user.id,
+      category: transaction.category,
     })
     .then((res) => {
       console.log(res);

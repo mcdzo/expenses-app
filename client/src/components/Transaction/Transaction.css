@@ -79,6 +79,13 @@
   width: 60px;
 }
 
+.green {
+  border-left: 10px solid rgb(6, 175, 14);
+}
+.red {
+  border-left: 10px solid rgb(212, 35, 3);
+}
+
 .delete-modal {
   background-color: hsla(0, 0%, 59%, 0.507);
   backdrop-filter: blur(4px);
@@ -144,12 +151,13 @@
   -webkit-border-radius: 8;
   -moz-border-radius: 8;
   border-radius: 8px;
-  padding: 6px 12px 6px 12px;
+
+  padding: 8px 25px 8px 25px;
   text-decoration: none;
   border: none;
   cursor: pointer;
 
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .delete-form-options .button-yes:hover {

@@ -14,7 +14,7 @@ const Transaction = db.define(
       allowNull: false,
     },
     amount: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     date: {
@@ -30,6 +30,10 @@ const Transaction = db.define(
     },
     user_id: {
       type: DataTypes.UUIDV4,
+      allowNull: false,
+    },
+    category: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

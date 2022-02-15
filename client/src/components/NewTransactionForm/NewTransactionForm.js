@@ -1,11 +1,18 @@
 import "./NewTransactionForm.css";
 import { useState } from "react";
+import useTransactions from "../../hooks/useTransactions";
 
-const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
+const NewTransactionForm = ({ onCloseForm }) => {
+  const { addTransaction } = useTransactions();
+  const [showCategory, setShowCategory] = useState({
+    income: false,
+    outcome: false,
+  });
   const [concept, setConcept] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
   const [type, setType] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleConcept = (evt) => {
     setConcept(evt.target.value);
@@ -19,15 +26,31 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
   const handleType = (evt) => {
     setType(evt.target.value);
   };
+  const handleCategory = (evt) => {
+    setCategory(evt.target.value);
+  };
+
+  const handleIncomeCategory = () => {
+    setShowCategory({ income: true, outcome: false });
+  };
+  const handleOutcomeCategory = () => {
+    setShowCategory({ income: false, outcome: true });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (concept === "" || amount === "" || date === "" || type === "") {
+    if (
+      concept === "" ||
+      amount === "" ||
+      date === "" ||
+      type === "" ||
+      category === ""
+    ) {
       alert("Faltan campos por completar!");
     } else {
-      parseInt(amount);
+      parseFloat(amount);
 
-      addTransaction({ concept, amount, date, type });
+      addTransaction({ concept, amount, date, type, category });
       onCloseForm();
     }
   };
@@ -82,22 +105,56 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
           <div className="transaction-type-container">
             Ingreso
             <input
+              id="income"
               type="radio"
               name="type"
               className="type-input"
               value="income"
               onChange={handleType}
+              onClick={handleIncomeCategory}
             ></input>
             Egreso
             <input
+              id="outcome"
               type="radio"
               name="type"
               className="type-input"
               value="outcome"
               onChange={handleType}
+              onClick={handleOutcomeCategory}
             ></input>
           </div>
         </div>
+        <div className="form-control">
+          <div className="category-list">
+            {showCategory.income && (
+              <>
+                <label>Categoría: </label>
+                <select onClick={handleCategory}>
+                  <option value=""></option>
+                  <option value="salary">Sueldo</option>
+                  <option value="other">Otras</option>
+                </select>
+              </>
+            )}
+
+            {showCategory.outcome && (
+              <>
+                <label>Categoría: </label>
+                <select onClick={handleCategory}>
+                  <option value=""></option>
+                  <option value="food">Comida</option>
+                  <option value="taxes">Impuestos</option>
+                  <option value="streaming">
+                    Streaming (Spotify, netflix, etc.)
+                  </option>
+                  <option value="other">Otras</option>
+                </select>
+              </>
+            )}
+          </div>
+        </div>
+
         <div className="form-control">
           <button>Agregar Transaccion</button>
         </div>
@@ -107,3 +164,8 @@ const NewTransactionForm = ({ onCloseForm, addTransaction }) => {
 };
 
 export default NewTransactionForm;
+
+/*
+
+
+*/
