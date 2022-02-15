@@ -5,6 +5,7 @@ import { TransactionContextProvider } from "./context/transactionContext";
 import Home from "./pages/Home/Home";
 import Transactions from "./pages/Transactions/Transactions";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       </TransactionContextProvider>
 
       <Route path="/" component={Login}></Route>
+      <Route path="/register" component={Register}></Route>
     </div>
   );
 }

@@ -39,12 +39,16 @@ const controller = {
           username: params.username,
         },
       }).then((data) => {
+        console.log(data);
         if (data !== null) {
           console.log("That username alredy exists");
           return res.status(200).send({
             message: ">>> That username alredy exists",
+            value: false,
+            data,
           });
         }
+
         const id = uuidv4();
         const encryptedPassword = bcrypt.hashSync(params.password, 10);
         User.create({
@@ -55,7 +59,9 @@ const controller = {
           password: encryptedPassword,
         }).then(() => {
           return res.status(200).send({
+            status: "success",
             message: ">>> User created successfully",
+            value: true,
           });
         });
       });
@@ -95,7 +101,7 @@ const controller = {
 
         if (bcrypt.compareSync(params.password, result.password)) {
           const token = jwt.sign(
-            { id: result.id, email: result.email },
+            { id: result.id, username: result.username },
             process.env.TOKEN_KEY,
             {
               expiresIn: "2h",
