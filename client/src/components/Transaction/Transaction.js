@@ -12,10 +12,14 @@ const Transaction = ({ transaction }) => {
   const { onEdit, onDelete } = useTransactions();
 
   const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [edit, setEdit] = useState(false);
   const [concept, setConcept] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+
+  const body = document.querySelector("body");
 
   const typeOp = {
     income: "Ingreso",
@@ -44,7 +48,7 @@ const Transaction = ({ transaction }) => {
 
   const onConfirmEdit = () => {
     if (concept === "" || amount === "" || date === "") {
-      alert("Faltan campos por completar!");
+      handleEDitModal();
     } else {
       const id = transaction.id;
       onEdit({ concept, amount, date, id });
@@ -52,7 +56,23 @@ const Transaction = ({ transaction }) => {
     }
   };
   const handleDeleteModal = () => {
+    setModalMessage("Esta seguro que quiere eliminar esta transaccion?");
+    setShowEdit(!showEdit);
+    body.style.overflow = "hidden";
+  };
+  const onCloseDeleteModal = () => {
     setShowDelete(!showDelete);
+    body.style.overflow = "auto";
+  };
+  const handleEDitModal = () => {
+    setModalMessage("Faltan datos por completar.");
+    setShowDelete(!showDelete);
+    body.style.overflow = "hidden";
+  };
+
+  const onCloseEditModal = () => {
+    setShowEdit(!showEdit);
+    body.style.overflow = "auto";
   };
 
   const handleDelete = (id) => {
@@ -60,6 +80,7 @@ const Transaction = ({ transaction }) => {
 
     console.log("delete");
     setShowDelete(!showDelete);
+    body.style.overflow = "auto";
   };
 
   return (
@@ -79,7 +100,7 @@ const Transaction = ({ transaction }) => {
         <div className="transaction-amount">
           {edit ? (
             <input
-              placeholder={transaction.amount}
+              placeholder={`$ ${transaction.amount}`}
               type="number"
               className="transaction-amount-input"
               onChange={handleAmount}
@@ -127,9 +148,9 @@ const Transaction = ({ transaction }) => {
       {showDelete && (
         <div className="delete-modal">
           <div className="delete-form">
-            <strong>Esta seguro que quiere eliminar esta transaccion?</strong>
+            <strong>{modalMessage}</strong>
             <div className="delete-form-options">
-              <button className="button-no" onClick={handleDeleteModal}>
+              <button className="button-no" onClick={onCloseDeleteModal}>
                 Cerrar
               </button>
               <button
@@ -138,6 +159,16 @@ const Transaction = ({ transaction }) => {
               >
                 Si
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showEdit && (
+        <div className="form-modal">
+          <div className="error-modal">
+            <strong>{modalMessage}</strong>
+            <div className="delete-form-options">
+              <button onClick={onCloseEditModal}>Cerrar</button>
             </div>
           </div>
         </div>

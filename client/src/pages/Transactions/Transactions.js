@@ -46,6 +46,11 @@ const Transactions = () => {
           </div>
         </div>
         <div className="all-transactions-container">
+          {TransactionsByCategory.length === 0 && (
+            <div className="empty-message">
+              <h2>No hay transacciones que mostrar</h2>
+            </div>
+          )}
           {TransactionsByCategory.map((transaction) => (
             <Transaction
               transaction={transaction}

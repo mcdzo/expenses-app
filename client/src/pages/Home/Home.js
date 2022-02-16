@@ -13,6 +13,7 @@ import UserTransactions from "../../services/Transactions/UserTransactions";
 const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const { dispatch } = useContext(transactionContext);
+  const body = document.querySelector("body");
   useEffect(() => {
     UserTransactions().then((transactions) => {
       console.log(transactions);
@@ -25,10 +26,12 @@ const Home = () => {
 
   const onShowForm = () => {
     setShowForm(!showForm);
+    body.style.overflow = "hidden";
   };
 
   const onCloseForm = () => {
     setShowForm(!showForm);
+    body.style.overflow = "auto";
   };
 
   return (

@@ -139,15 +139,19 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
-
+  margin: 5px;
   font-size: 16px;
 }
-
+.delete-form-options .button-yes {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+}
 .delete-form-options .button-yes:hover {
   background-color: rgb(10, 180, 66);
 }
 .delete-form-options .button-no {
   background-color: rgb(180, 30, 10);
+  color: #fff;
 }
 .delete-form-options .button-no:hover {
   background-color: rgb(212, 33, 10);
