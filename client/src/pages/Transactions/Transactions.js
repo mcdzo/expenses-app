@@ -36,7 +36,7 @@ const Transactions = () => {
       <section className="all-transactions-section">
         <div className="list-title">
           <h4>Todas las transacciones: </h4>
-          <div className="category-list">
+          <div className="all-transactions-category-list">
             <label>Categorías: </label>
             <select onClick={handleCategory}>
               <option value="all">Todas</option>

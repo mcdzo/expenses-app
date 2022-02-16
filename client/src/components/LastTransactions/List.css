@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-right: 22px;
+  padding: 10px;
 }
 
 .list-title {
@@ -28,4 +28,24 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.last-transactions-category-list {
+  width: 30%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.last-transactions-category-list select {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+.last-transactions-category-list select:focus {
+  outline: none;
 }

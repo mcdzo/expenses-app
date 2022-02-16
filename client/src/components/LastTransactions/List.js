@@ -31,7 +31,7 @@ const List = () => {
     <section className="transactions-section">
       <div className="list-title">
         <h4>Últimas Tansacciones: </h4>
-        <div className="category-list">
+        <div className="last-transactions-category-list">
           <label>Categorías: </label>
           <select onClick={handleCategory}>
             <option value="all">Todas</option>

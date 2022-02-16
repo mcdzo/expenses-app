@@ -101,28 +101,30 @@ const NewTransactionForm = ({ onCloseForm }) => {
         </div>
 
         <div className="form-control">
-          <label>Tipo de transaccion: </label>
           <div className="transaction-type-container">
-            Ingreso
-            <input
-              id="income"
-              type="radio"
-              name="type"
-              className="type-input"
-              value="income"
-              onChange={handleType}
-              onClick={handleIncomeCategory}
-            ></input>
-            Gasto
-            <input
-              id="outcome"
-              type="radio"
-              name="type"
-              className="type-input"
-              value="outcome"
-              onChange={handleType}
-              onClick={handleOutcomeCategory}
-            ></input>
+            <label>Tipo de transacción: </label>
+            <div className="transaction-type-options">
+              Ingreso
+              <input
+                id="income"
+                type="radio"
+                name="type"
+                className="type-input"
+                value="income"
+                onChange={handleType}
+                onClick={handleIncomeCategory}
+              ></input>
+              Gasto
+              <input
+                id="outcome"
+                type="radio"
+                name="type"
+                className="type-input"
+                value="outcome"
+                onChange={handleType}
+                onClick={handleOutcomeCategory}
+              ></input>
+            </div>
           </div>
         </div>
         <div className="form-control">

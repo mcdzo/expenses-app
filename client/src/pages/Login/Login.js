@@ -46,9 +46,8 @@ const Login = () => {
 
           <p>
             Esta app forma parte del challenge FULLSTACK de Alkemy, para poder
-            utilizarla necesitas logearte. Si no estas registrado podes hacerlo:
+            utilizarla necesitas logearte.
           </p>
-          <Link to="/register">Registrarse</Link>
         </div>
         <form className="login-form" type="submit" onSubmit={onSubmit}>
           <div className="login-form-title">
@@ -72,6 +71,7 @@ const Login = () => {
             ></input>
           </div>
           <button>Ingresar</button>
+          <Link to="/register">Registrarse</Link>
         </form>
       </div>
     </div>

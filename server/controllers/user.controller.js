@@ -51,6 +51,20 @@ const controller = {
 
         const id = uuidv4();
         const encryptedPassword = bcrypt.hashSync(params.password, 10);
+        const token = jwt.sign(
+          { id: id, username: params.username },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "2h",
+          }
+        );
+
+        const user = {
+          id: id,
+          name: params.name,
+          surname: params.surname,
+          username: params.username,
+        };
         User.create({
           id: id,
           name: params.name,
@@ -62,6 +76,8 @@ const controller = {
             status: "success",
             message: ">>> User created successfully",
             value: true,
+            user: user,
+            jwt: token,
           });
         });
       });

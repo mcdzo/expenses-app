@@ -42,3 +42,23 @@
   overflow-y: scroll;
   padding: 20px;
 }
+
+.all-transactions-category-list {
+  width: 20%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.all-transactions-category-list select {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+.all-transactions-category-list select:focus {
+  outline: none;
+}
