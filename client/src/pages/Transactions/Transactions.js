@@ -18,7 +18,7 @@ const Transactions = () => {
       });
       setCategory(transactions);
     });
-  }, []);
+  }, [transactions]);
 
   const handleCategory = (evt) => {
     const keyword = evt.target.value;

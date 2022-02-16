@@ -57,7 +57,7 @@ const Transaction = ({ transaction }) => {
   };
   const handleDeleteModal = () => {
     setModalMessage("Esta seguro que quiere eliminar esta transaccion?");
-    setShowEdit(!showEdit);
+    setShowDelete(!showDelete);
     body.style.overflow = "hidden";
   };
   const onCloseDeleteModal = () => {
@@ -66,7 +66,7 @@ const Transaction = ({ transaction }) => {
   };
   const handleEDitModal = () => {
     setModalMessage("Faltan datos por completar.");
-    setShowDelete(!showDelete);
+    setShowEdit(!showEdit);
     body.style.overflow = "hidden";
   };
 

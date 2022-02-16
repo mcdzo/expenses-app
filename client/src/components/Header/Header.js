@@ -13,12 +13,10 @@ const Header = () => {
   return (
     <header className="header">
       <div className="app-title">
-        <Link to="/home">
-          Control de gastos de:
-          <strong>
-            {user.name} {user.surname}
-          </strong>
-        </Link>
+        <Link to="/home">Control de gastos de:</Link>
+        <strong>
+          {user.name} {user.surname}
+        </strong>
       </div>
 
       <div className="user-menu">
