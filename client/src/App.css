@@ -8,11 +8,12 @@
 }
 body {
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .App {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   /*background-color: #ffffff;*/
   display: flex;
   flex-direction: column;
@@ -38,4 +39,23 @@ body {
   background-color: #000000;
   border-radius: 10px;
   border: 3px solid #ffffff;
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .App {
+    width: 100vw;
+    min-height: 100vh;
+    /*background-color: #ffffff;*/
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
 }

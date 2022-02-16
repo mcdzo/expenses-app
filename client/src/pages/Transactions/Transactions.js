@@ -34,7 +34,7 @@ const Transactions = () => {
         <Link to="/home">Volver</Link>
       </div>
       <section className="all-transactions-section">
-        <div className="list-title">
+        <div className="all-transactions-list-title">
           <h4>Todas las transacciones: </h4>
           <div className="all-transactions-category-list">
             <label>Categorías: </label>

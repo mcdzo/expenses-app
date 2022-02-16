@@ -1,6 +1,5 @@
 .display {
-  margin: 30px 20px 20px 20px;
-
+  margin: 20px 0px;
   width: 400px;
   height: 150px;
   background-color: #e2e8f0;
@@ -21,4 +20,23 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 46px;
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+  .display {
+    width: 90%;
+    height: 20%;
+  }
+  .display-balance {
+    font-size: 36px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
 }

@@ -41,3 +41,37 @@
   color: #128f12;
   border: 1px solid #128f12;
 }
+
+@media (min-width: 320px) and (max-width: 575px) {
+  .home-options-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .app-content button {
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+  }
+  .home-options-section a {
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .app-content button {
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+  }
+  .home-options-section a {
+    font-size: 20px;
+    padding: 7px 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+}

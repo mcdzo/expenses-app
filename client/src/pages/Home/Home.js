@@ -36,11 +36,11 @@ const Home = () => {
       <Header></Header>
       <section className="app-content">
         <Display></Display>
-        <List></List>
         <div className="home-options-section">
           <button onClick={onShowForm}>Nueva Transaccion</button>
           <Link to="/all-transactions">Ver todas las transacciones</Link>
         </div>
+        <List></List>
 
         {showForm && (
           <NewTransactionForm onCloseForm={onCloseForm}></NewTransactionForm>

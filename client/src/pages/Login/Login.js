@@ -5,9 +5,10 @@ import LoginService from "../../services/Login/LoginService";
 
 const Login = () => {
   const [, navigate] = useLocation();
+  const [showModal, setShowModal] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [modalMessage, setModalMessage] = useState("");
   const onChangeUsername = (evt) => {
     setUsername(evt.target.value);
   };
@@ -19,7 +20,8 @@ const Login = () => {
     evt.preventDefault();
 
     if (username === "" || password === "") {
-      alert("Hay campos obligatorios");
+      setModalMessage("Faltan datos por completar.");
+      setShowModal(!showModal);
     } else {
       LoginService({ username, password }).then((data) => {
         if (data.value) {
@@ -29,7 +31,8 @@ const Login = () => {
           window.sessionStorage.setItem("user", JSON.stringify(loggedUser));
           navigate("/home");
         } else {
-          alert("Datos incorrectos");
+          setModalMessage("Nombre de usuario o contraseña incorrecto.");
+          setShowModal(!showModal);
         }
       });
     }
@@ -74,6 +77,16 @@ const Login = () => {
           <Link to="/register">Registrarse</Link>
         </form>
       </div>
+      {showModal && (
+        <div className="form-modal">
+          <div className="error-modal">
+            <strong>{modalMessage}</strong>
+            <div className="delete-form-options">
+              <button onClick={() => setShowModal(!showModal)}>Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
