@@ -143,6 +143,10 @@ const NewTransactionForm = ({ onCloseForm }) => {
                   <option value="streaming">
                     Streaming (Spotify, netflix, etc.)
                   </option>
+                  <option value="market">Supermercado</option>
+                  <option value="shopping">Shopping</option>
+                  <option value="drugstore">Farmacia</option>
+
                   <option value="other">Otras</option>
                 </select>
               </>
