@@ -77,6 +77,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
               type="number"
               className={`amount-input ${errorState.style}`}
               min={0}
+              step="0.01"
               value={amount}
               onChange={(evt) => setAmount(evt.target.value)}
             ></input>
