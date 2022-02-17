@@ -1,4 +1,4 @@
-import "./Transactions.css";
+import "./AllTransactions.css";
 import { Link } from "wouter";
 import { useContext, useEffect, useState } from "react";
 
@@ -12,7 +12,6 @@ const Transactions = () => {
   const [TransactionsByCategory, setCategory] = useState([]);
   useEffect(() => {
     UserTransactions().then((transactions) => {
-      console.log(transactions);
       setAllTransactions(transactions);
       setCategory(transactions);
     });

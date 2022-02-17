@@ -19,7 +19,6 @@ const Register = () => {
       setShowModal(!showModal);
     } else {
       RegisterService({ name, surname, username, password }).then((data) => {
-        console.log(data);
         if (data.value) {
           const jwt = data.jwt;
           const loggedUser = data.user;

@@ -92,39 +92,3 @@ const Login = () => {
 };
 
 export default Login;
-
-/* <div className="login">
-      <div className="login-presentation-container">
-        <div className="login-presentation">
-          <h2>CHALLENGE FULL STACK - Javascript</h2>
-          <h4>App de control de gastos</h4>
-          <p>
-            Esta app forma parte del challenge FULLSTACK de Alkemy, para poder
-            utilizarla necesitas logearte. Si no estas registrado podes hacerlo
-            clickeando acá.
-          </p>
-          <small>Desarrollado por ...</small>
-        </div>
-      </div>
-      <div className="login-form-container">
-        <form className="login-form" type="submit" onSubmit={onSubmit}>
-          <div className="form-control">
-            <label>Nombre de usuario: (*)</label>
-            <input
-              type="text"
-              placeholder=""
-              onChange={onChangeUsername}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label>Contraseña: (*)</label>
-            <input
-              type="password"
-              placeholder=""
-              onChange={onChangePassword}
-            ></input>
-          </div>
-          <button>Ingresar</button>
-        </form>
-      </div>
-    </div> */

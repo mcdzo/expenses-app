@@ -16,7 +16,6 @@ const Home = () => {
   const body = document.querySelector("body");
   useEffect(() => {
     UserTransactions().then((transactions) => {
-      console.log(transactions);
       dispatch({
         type: "GET_TRANSACTIONS",
         transactions: transactions,

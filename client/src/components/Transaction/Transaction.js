@@ -78,7 +78,6 @@ const Transaction = ({ transaction }) => {
   const handleDelete = (id) => {
     onDelete(id);
 
-    console.log("delete");
     setShowDelete(!showDelete);
     body.style.overflow = "auto";
   };

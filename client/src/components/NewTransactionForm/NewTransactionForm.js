@@ -14,18 +14,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleConcept = (evt) => {
-    setConcept(evt.target.value);
-  };
-  const handleAmount = (evt) => {
-    setAmount(evt.target.value);
-  };
-  const handleDate = (evt) => {
-    setDate(evt.target.value);
-  };
-  const handleType = (evt) => {
-    setType(evt.target.value);
-  };
+  const handleType = (evt) => {};
   const handleCategory = (evt) => {
     setCategory(evt.target.value);
   };
@@ -74,7 +63,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
             placeholder="Ej. Comida en el bar"
             value={concept}
             className="concept-input"
-            onChange={handleConcept}
+            onChange={(evt) => setConcept(evt.target.value)}
           ></input>
         </div>
         <div className="form-control">
@@ -86,7 +75,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
               className="amount-input"
               min="0"
               value={amount}
-              onChange={handleAmount}
+              onChange={(evt) => setAmount(evt.target.value)}
             ></input>
           </div>
         </div>
@@ -97,7 +86,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
             type="date"
             className="date-input"
             value={date}
-            onChange={handleDate}
+            onChange={(evt) => setDate(evt.target.value)}
           ></input>
         </div>
 
@@ -112,7 +101,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
                 name="type"
                 className="type-input"
                 value="income"
-                onChange={handleType}
+                onChange={(evt) => setType(evt.target.value)}
                 onClick={handleIncomeCategory}
               ></input>
               Gasto
@@ -122,7 +111,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
                 name="type"
                 className="type-input"
                 value="outcome"
-                onChange={handleType}
+                onChange={(evt) => setType(evt.target.value)}
                 onClick={handleOutcomeCategory}
               ></input>
             </div>
@@ -167,8 +156,3 @@ const NewTransactionForm = ({ onCloseForm }) => {
 };
 
 export default NewTransactionForm;
-
-/*
-
-
-*/

@@ -12,7 +12,6 @@ const List = () => {
 
   useEffect(() => {
     LastTransactions().then((transactions) => {
-      console.log(transactions);
       setLastTransactions(transactions);
       setCategory(transactions);
     });

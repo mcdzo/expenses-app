@@ -9,7 +9,6 @@ const LoginService = ({ username, password }) => {
     })
     .then((res) => {
       const data = res.data;
-      console.log(data);
       return data;
     });
 };

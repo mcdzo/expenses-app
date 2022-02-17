@@ -11,7 +11,7 @@ const LastTransactions = () => {
     })
     .then((res) => {
       const data = res.data.result;
-      console.log(data);
+
       return data;
     });
 };

@@ -10,7 +10,7 @@ const DeleteTransaction = (id) => {
     })
     .then((res) => {
       const result = res.data.result;
-      console.log(res);
+
       return result;
     });
 };

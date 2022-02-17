@@ -14,7 +14,6 @@ const EditTransaction = (transaction) => {
       date: transaction.date,
     })
     .then((res) => {
-      console.log(res);
       const result = res.data.result;
 
       return result;

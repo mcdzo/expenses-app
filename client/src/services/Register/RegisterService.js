@@ -11,7 +11,6 @@ const RegisterService = ({ name, surname, username, password }) => {
     })
     .then((res) => {
       const data = res.data;
-      console.log(data);
       return data;
     });
 };

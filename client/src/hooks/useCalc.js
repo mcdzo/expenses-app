@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 const Calc = () => {
   const { transactions } = useContext(transactionContext);
-  console.log(transactions);
+
   const type_income = transactions.filter((tr) => tr.type === "income");
   const type_outcome = transactions.filter((tr) => tr.type === "outcome");
 

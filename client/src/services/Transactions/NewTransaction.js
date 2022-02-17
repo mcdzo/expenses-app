@@ -15,7 +15,6 @@ const NewTransaction = (transaction) => {
       category: transaction.category,
     })
     .then((res) => {
-      console.log(res);
       const data = res.data.transaction;
 
       return data;

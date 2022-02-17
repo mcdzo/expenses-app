@@ -18,7 +18,6 @@ const useTransactions = () => {
     };
 
     NewTransaction(transaction).then((tr) => {
-      console.log(tr);
       dispatch({
         type: "ADD_TRANSACTION",
         transaction: tr,
@@ -32,13 +31,10 @@ const useTransactions = () => {
       amount: amount,
       date: date,
     };
-    console.log(editedTransaction);
 
     EditTransaction(editedTransaction).then((res) => {
       if (res) {
-        //Ver si hay otra manera
         UserTransactions().then((transactions) => {
-          console.log(transactions);
           dispatch({
             type: "GET_TRANSACTIONS",
             transactions: transactions,
