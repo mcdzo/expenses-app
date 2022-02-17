@@ -8,17 +8,17 @@ const Register = () => {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    if (name === "" || surname === "" || username === "" || password === "") {
+    if (name === "" || surname === "" || email === "" || password === "") {
       setModalMessage("Faltan campos del formulario por completar");
       setShowModal(!showModal);
     } else {
-      RegisterService({ name, surname, username, password }).then((data) => {
+      RegisterService({ name, surname, email, password }).then((data) => {
         if (data.value) {
           const jwt = data.jwt;
           const loggedUser = data.user;
@@ -26,9 +26,7 @@ const Register = () => {
           window.sessionStorage.setItem("user", JSON.stringify(loggedUser));
           navigate("/home");
         } else {
-          setModalMessage(
-            "Ya existe un usuario registrado con ese nombre de usuario."
-          );
+          setModalMessage("Ya existe un usuario registrado con ese email.");
           setShowModal(!showModal);
         }
       });
@@ -71,11 +69,11 @@ const Register = () => {
               ></input>
             </div>
             <div className="form-control">
-              <label>Nombre de usuario: (*)</label>
+              <label>Email: (*)</label>
               <input
                 type="text"
                 placeholder=""
-                onChange={(evt) => setUsername(evt.target.value)}
+                onChange={(evt) => setEmail(evt.target.value)}
               ></input>
             </div>
             <div className="form-control">

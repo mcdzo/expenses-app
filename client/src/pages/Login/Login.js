@@ -6,11 +6,11 @@ import LoginService from "../../services/Login/LoginService";
 const Login = () => {
   const [, navigate] = useLocation();
   const [showModal, setShowModal] = useState(false);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [modalMessage, setModalMessage] = useState("");
-  const onChangeUsername = (evt) => {
-    setUsername(evt.target.value);
+  const onChangeEmail = (evt) => {
+    setEmail(evt.target.value);
   };
   const onChangePassword = (evt) => {
     setPassword(evt.target.value);
@@ -19,11 +19,11 @@ const Login = () => {
   const onSubmit = (evt) => {
     evt.preventDefault();
 
-    if (username === "" || password === "") {
+    if (email === "" || password === "") {
       setModalMessage("Faltan datos por completar.");
       setShowModal(!showModal);
     } else {
-      LoginService({ username, password }).then((data) => {
+      LoginService({ email, password }).then((data) => {
         if (data.value) {
           const jwt = data.jwt;
           const loggedUser = data.user;
@@ -31,7 +31,7 @@ const Login = () => {
           window.sessionStorage.setItem("user", JSON.stringify(loggedUser));
           navigate("/home");
         } else {
-          setModalMessage("Nombre de usuario o contraseña incorrecto.");
+          setModalMessage("Email o contraseña incorrecto.");
           setShowModal(!showModal);
         }
       });
@@ -58,12 +58,8 @@ const Login = () => {
           </div>
 
           <div className="form-control">
-            <label>Nombre de usuario: (*)</label>
-            <input
-              type="text"
-              placeholder=""
-              onChange={onChangeUsername}
-            ></input>
+            <label>Email: (*)</label>
+            <input type="text" placeholder="" onChange={onChangeEmail}></input>
           </div>
           <div className="form-control">
             <label>Contraseña: (*)</label>

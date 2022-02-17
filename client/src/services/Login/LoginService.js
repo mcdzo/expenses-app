@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const LoginService = ({ username, password }) => {
+const LoginService = ({ email, password }) => {
   const url = "http://localhost:3001/api/login";
   return axios
     .post(url, {
-      username: username,
+      email: email,
       password: password,
     })
     .then((res) => {

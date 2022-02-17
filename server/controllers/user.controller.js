@@ -23,27 +23,27 @@ const controller = {
 
     const validate_name = !validator.isEmpty(params.name);
     const validate_surname = !validator.isEmpty(params.surname);
-    const validate_username = !validator.isEmpty(params.username);
+    const validate_email = !validator.isEmpty(params.email);
     const validate_password = !validator.isEmpty(params.password);
 
     if (
       validate_name &&
       validate_surname &&
-      validate_username &&
+      validate_email &&
       validate_password
     ) {
       //verificar que el usuario sea un usuario nuevo
 
       User.findOne({
         where: {
-          username: params.username,
+          email: params.email,
         },
       }).then((data) => {
         console.log(data);
         if (data !== null) {
-          console.log("That username alredy exists");
+          console.log("That email alredy exists");
           return res.status(200).send({
-            message: ">>> That username alredy exists",
+            message: ">>> That email alredy exists",
             value: false,
             data,
           });
@@ -52,7 +52,7 @@ const controller = {
         const id = uuidv4();
         const encryptedPassword = bcrypt.hashSync(params.password, 10);
         const token = jwt.sign(
-          { id: id, username: params.username },
+          { id: id, email: params.email },
           process.env.TOKEN_KEY,
           {
             expiresIn: "2h",
@@ -63,13 +63,13 @@ const controller = {
           id: id,
           name: params.name,
           surname: params.surname,
-          username: params.username,
+          email: params.email,
         };
         User.create({
           id: id,
           name: params.name,
           surname: params.surname,
-          username: params.username,
+          email: params.email,
           password: encryptedPassword,
         }).then(() => {
           return res.status(200).send({
@@ -93,23 +93,23 @@ const controller = {
 
     console.log(params);
 
-    const validate_username = !validator.isEmpty(params.username);
+    const validate_email = !validator.isEmpty(params.email);
     const validate_password = !validator.isEmpty(params.password);
 
-    if (validate_username && validate_password) {
+    if (validate_email && validate_password) {
       //verificar que el usuario este registrado y que la contraseña sea correcta
 
       User.findOne({
         where: {
-          username: params.username,
+          email: params.email,
         },
       }).then((result) => {
         if (result === null) {
-          console.log("That username doesnt exists");
+          console.log("That email doesnt exists");
           return res.status(200).send({
             status: "error",
             value: false,
-            result: "invalid username",
+            result: "invalid email",
           });
         }
 
@@ -117,7 +117,7 @@ const controller = {
 
         if (bcrypt.compareSync(params.password, result.password)) {
           const token = jwt.sign(
-            { id: result.id, username: result.username },
+            { id: result.id, email: result.email },
             process.env.TOKEN_KEY,
             {
               expiresIn: "2h",
@@ -128,7 +128,7 @@ const controller = {
             id: result.id,
             name: result.name,
             surname: result.surname,
-            username: result.username,
+            email: result.email,
           };
           res.status(200).send({
             status: "success",

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const RegisterService = ({ name, surname, username, password }) => {
+const RegisterService = ({ name, surname, email, password }) => {
   const url = "http://localhost:3001/api/register";
   return axios
     .post(url, {
       name: name,
       surname: surname,
-      username: username,
+      email: email,
       password: password,
     })
     .then((res) => {
