@@ -101,6 +101,7 @@ const Transaction = ({ transaction }) => {
           {edit ? (
             <input
               placeholder={`$ ${transaction.amount}`}
+              min={0}
               type="number"
               className="transaction-amount-input"
               onChange={handleAmount}

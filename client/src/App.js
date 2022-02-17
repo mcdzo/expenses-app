@@ -3,7 +3,7 @@ import { Route } from "wouter";
 import { TransactionContextProvider } from "./context/transactionContext";
 
 import Home from "./pages/Home/Home";
-import Transactions from "./pages/Transactions/Transactions";
+import Transactions from "./pages/AllTransactions/AllTransactions";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 

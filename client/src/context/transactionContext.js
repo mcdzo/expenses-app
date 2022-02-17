@@ -6,8 +6,6 @@ const reducer = (transactions, action) => {
   switch (action.type) {
     case "GET_TRANSACTIONS":
       return action.transactions;
-    case "LAST_TRANSACTIONS":
-      return action.transactions;
     case "ADD_TRANSACTION":
       const newTransaction = action.transaction;
       return [...transactions, newTransaction];

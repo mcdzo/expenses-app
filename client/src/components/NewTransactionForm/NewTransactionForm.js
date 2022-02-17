@@ -57,14 +57,14 @@ const NewTransactionForm = ({ onCloseForm }) => {
 
   return (
     <div className="form-modal">
+      <div className="form-header">
+        <button onClick={onCloseForm}>Cerrar</button>
+      </div>
       <form
         className="new-transaction-form"
         type="submit"
         onSubmit={handleSubmit}
       >
-        <div className="form-header">
-          <button onClick={onCloseForm}>Cerrar</button>
-        </div>
         <h2>Nueva Transaccion</h2>
 
         <div className="form-control">
@@ -84,6 +84,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
             <input
               type="number"
               className="amount-input"
+              min="0"
               value={amount}
               onChange={handleAmount}
             ></input>

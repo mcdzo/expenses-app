@@ -7,15 +7,13 @@ import Transaction from "../../components/Transaction/Transaction";
 import UserTransactions from "../../services/Transactions/UserTransactions";
 
 const Transactions = () => {
-  const { transactions, dispatch } = useContext(transactionContext);
+  const { transactions } = useContext(transactionContext);
+  const [AllTransactions, setAllTransactions] = useState([]);
   const [TransactionsByCategory, setCategory] = useState([]);
   useEffect(() => {
     UserTransactions().then((transactions) => {
       console.log(transactions);
-      dispatch({
-        type: "GET_TRANSACTIONS",
-        transactions: transactions,
-      });
+      setAllTransactions(transactions);
       setCategory(transactions);
     });
   }, [transactions]);
@@ -23,9 +21,9 @@ const Transactions = () => {
   const handleCategory = (evt) => {
     const keyword = evt.target.value;
     if (keyword === "all") {
-      setCategory(transactions);
+      setCategory(AllTransactions);
     } else {
-      setCategory(transactions.filter((el) => el.category === keyword));
+      setCategory(AllTransactions.filter((el) => el.category === keyword));
     }
   };
   return (
