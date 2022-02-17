@@ -142,6 +142,10 @@
   outline: none;
 }
 
+.form-error-message {
+  color: rgb(255, 0, 0);
+}
+
 @media (min-width: 320px) and (max-width: 575px) {
   .transaction-type-container {
     display: flex;

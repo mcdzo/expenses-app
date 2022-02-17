@@ -14,10 +14,10 @@ const NewTransactionForm = ({ onCloseForm }) => {
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleType = (evt) => {};
-  const handleCategory = (evt) => {
-    setCategory(evt.target.value);
-  };
+  const [errorState, setErrorState] = useState({
+    style: "",
+    message: "",
+  });
 
   const handleIncomeCategory = () => {
     setShowCategory({ income: true, outcome: false });
@@ -35,7 +35,10 @@ const NewTransactionForm = ({ onCloseForm }) => {
       type === "" ||
       category === ""
     ) {
-      alert("Faltan campos por completar!");
+      setErrorState({
+        style: "red",
+        message: "Hay campos requeridos (*).",
+      });
     } else {
       parseFloat(amount);
 
@@ -55,25 +58,25 @@ const NewTransactionForm = ({ onCloseForm }) => {
         onSubmit={handleSubmit}
       >
         <h2>Nueva Transaccion</h2>
-
+        <small className="form-error-message">{`${errorState.message}`}</small>
         <div className="form-control">
-          <label>Concepto: </label>
+          <label>Concepto: (*)</label>
           <input
             type="text"
             placeholder="Ej. Comida en el bar"
             value={concept}
-            className="concept-input"
+            className={`concept-input ${errorState.style}`}
             onChange={(evt) => setConcept(evt.target.value)}
           ></input>
         </div>
         <div className="form-control">
-          <label>Monto: </label>
+          <label>Monto: (*)</label>
           <div className="amount-input-container">
             $
             <input
               type="number"
-              className="amount-input"
-              min="0"
+              className={`amount-input ${errorState.style}`}
+              min={0}
               value={amount}
               onChange={(evt) => setAmount(evt.target.value)}
             ></input>
@@ -81,7 +84,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
         </div>
 
         <div className="form-control">
-          <label>Fecha: </label>
+          <label>Fecha: (*)</label>
           <input
             type="date"
             className="date-input"
@@ -92,7 +95,7 @@ const NewTransactionForm = ({ onCloseForm }) => {
 
         <div className="form-control">
           <div className="transaction-type-container">
-            <label>Tipo de transacción: </label>
+            <label>Tipo de transacción: (*)</label>
             <div className="transaction-type-options">
               Ingreso
               <input
@@ -121,8 +124,8 @@ const NewTransactionForm = ({ onCloseForm }) => {
           <div className="category-list">
             {showCategory.income && (
               <>
-                <label>Categoría: </label>
-                <select onClick={handleCategory}>
+                <label>Categoría: (*)</label>
+                <select onClick={(evt) => setCategory(evt.target.value)}>
                   <option value=""></option>
                   <option value="salary">Sueldo</option>
                   <option value="other">Otras</option>
@@ -132,8 +135,8 @@ const NewTransactionForm = ({ onCloseForm }) => {
 
             {showCategory.outcome && (
               <>
-                <label>Categoría: </label>
-                <select onClick={handleCategory}>
+                <label>Categoría: (*)</label>
+                <select onClick={(evt) => setCategory(evt.target.value)}>
                   <option value=""></option>
                   <option value="food">Comida</option>
                   <option value="taxes">Impuestos</option>
