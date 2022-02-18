@@ -1,9 +1,12 @@
 import { useLocation, Link } from "wouter";
 import "./Login.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LoginService from "../../services/Login/LoginService";
+import userContext from "../../context/userContext";
 
 const Login = () => {
+  const { setIsLogged } = useContext(userContext);
+
   const [, navigate] = useLocation();
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
@@ -29,6 +32,9 @@ const Login = () => {
           const loggedUser = data.user;
           window.sessionStorage.setItem("jwt", jwt);
           window.sessionStorage.setItem("user", JSON.stringify(loggedUser));
+          setIsLogged({
+            type: "IS_LOGGED",
+          });
           navigate("/home");
         } else {
           setModalMessage("Email o contraseña incorrecto.");

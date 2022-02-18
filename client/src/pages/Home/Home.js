@@ -1,6 +1,6 @@
 import "./Home.css";
 import { useEffect, useContext, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 import Header from "../../components/Header/Header";
 import Display from "../../components/Display/Display";
@@ -9,18 +9,26 @@ import NewTransactionForm from "../../components/NewTransactionForm/NewTransacti
 
 import transactionContext from "../../context/transactionContext";
 import UserTransactions from "../../services/Transactions/UserTransactions";
+import userContext from "../../context/userContext";
 
 const Home = () => {
-  const [showForm, setShowForm] = useState(false);
+  const { isLogged } = useContext(userContext);
+  const [, navigate] = useLocation();
   const { dispatch } = useContext(transactionContext);
+  const [showForm, setShowForm] = useState(false);
+
   const body = document.querySelector("body");
   useEffect(() => {
-    UserTransactions().then((transactions) => {
-      dispatch({
-        type: "GET_TRANSACTIONS",
-        transactions: transactions,
+    if (isLogged) {
+      UserTransactions().then((transactions) => {
+        dispatch({
+          type: "GET_TRANSACTIONS",
+          transactions: transactions,
+        });
       });
-    });
+    } else {
+      navigate("/");
+    }
   }, []);
 
   const onShowForm = () => {
@@ -35,19 +43,25 @@ const Home = () => {
 
   return (
     <>
-      <Header></Header>
-      <section className="app-content">
-        <Display></Display>
-        <div className="home-options-section">
-          <button onClick={onShowForm}>Nueva Transaccion</button>
-          <Link to="/all-transactions">Ver todas las transacciones</Link>
-        </div>
-        <List></List>
+      {isLogged && (
+        <>
+          <Header></Header>
+          <section className="app-content">
+            <Display></Display>
+            <div className="home-options-section">
+              <button onClick={onShowForm}>Nueva Transaccion</button>
+              <Link to="/all-transactions">Ver todas las transacciones</Link>
+            </div>
+            <List></List>
 
-        {showForm && (
-          <NewTransactionForm onCloseForm={onCloseForm}></NewTransactionForm>
-        )}
-      </section>
+            {showForm && (
+              <NewTransactionForm
+                onCloseForm={onCloseForm}
+              ></NewTransactionForm>
+            )}
+          </section>
+        </>
+      )}
     </>
   );
 };
